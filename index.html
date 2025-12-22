@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bashundhara Living | Find Your Home</title>
+    <link rel="stylesheet" href="try.css">
+    <script src="https://kit.fontawesome.com/your-code.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-container">
+        <div class="logo">Bashun-Stay</div>
+        
+         <ul class="nav-menu">
+    <li><a href="#" onclick="showHome()">Home</a></li>
+    <li><a href="#" onclick="showAIConsultancy()" class="ai-link">AI Consultancy</a></li>
+    <li><a href="#apartmentForm">List Your Flat</a></li>
+    <li><a href="#contact">Contact Us</a></li>
+</ul>
+
+        <div class="nav-auth">
+            <button class="btn-secondary" onclick="openAuth('login')">Login</button>
+            <button class="btn-primary" onclick="openAuth('register')">Register</button>
+        </div>
+
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+
+    </div>
+</nav>
+
+    <header class="hero">
+         
+        <h1>Find your perfect stay in Bashundhara</h1>
+
+    <div class="search-pill">
+    <div class="search-section">
+        <label>Where</label>
+        <input type="text" id="whereInput" placeholder="Search blocks (e.g. Block A)">
+    </div>
+    
+    <div class="divider"></div>
+
+    <div class="search-section">
+        <label>When</label>
+        <div class="date-inputs">
+          
+            <input type="date" id="checkIn" placeholder="From">
+            <span> - </span>
+        ?
+            <input type="date" id="checkOut" placeholder="To">
+        </div>
+    </div>
+    
+    <div class="divider"></div>
+
+    <div class="search-section">
+        <label>Who</label>
+        <input type="number" id="guestCount" placeholder="Add members" min="1">
+    </div>
+
+    <button class="search-circle-btn" onclick="applyAdvancedFilter()">
+        <i class="fas fa-search"></i>
+    </button>
+</div>
+    </header>
+    <div class="filter-container container">
+    <span>Filter by Area:</span>
+    <select id="filterBlock" onchange="filterByBlock()">
+        <option value="ALL">Show All Bashundhara</option>
+        <option value="A">Block A</option>
+        <option value="B">Block B</option>
+        <option value="C">Block C</option>
+        <option value="D">Block D</option>
+        <option value="I">Block I</option>
+    </select>
+</div>
+
+    <main class="container">
+        <h2>Available Apartments</h2>
+        <div class="property-grid" id="propertyGrid">
+            </div>
+    </main>
+    <section class="admin-section container">
+    <div class="form-container">
+        <h2>List Your Apartment in Bashundhara</h2>
+        <p>Fill in the details to reach thousands of tenants.</p>
+        
+        <form id="apartmentForm">
+           <div class="form-row">
+    <select id="block" required>
+        <option value="" disabled selected>Select Block</option>
+        <option value="A">Block A</option>
+        <option value="B">Block B</option>
+        <option value="C">Block C</option>
+        <option value="D">Block D</option>
+        <option value="E">Block E</option>
+        <option value="F">Block F</option>
+        <option value="G">Block G</option>
+        <option value="H">Block H</option>
+        <option value="I">Block I</option>
+        <option value="J">Block J</option>
+        <option value="K">Block K</option>
+        <option value="L">Block L</option>
+        <option value="M">Block M</option>
+        <option value="N">Block N</option>
+    </select>
+    
+    <input type="number" id="rent" placeholder="Rent (BDT)" required>
+</div>
+            <div class="form-row">
+                <input type="number" id="beds" placeholder="Number of Beds" required>
+                <input type="number" id="sqft" placeholder="Square Feet" required>
+            </div>
+            <div class="form-row">
+                <input type="text" id="ownerContact" placeholder="Your Phone Number" required>
+                <select id="lift">
+                    <option value="false">No Lift</option>
+                    <option value="true">Has Lift</option>
+                </select>
+            </div>
+            <input type="text" id="imageUrl" placeholder="Image URL (e.g. https://image-link.com)">
+            
+            <button type="submit" class="btn-submit">Post Apartment</button>
+        </form>
+    </div>
+</section>
+<section id="aiConsultancyPage" class="consultancy-view" style="display: none;">
+    <div class="consultancy-container">
+        <aside class="consultancy-sidebar">
+            <div class="ai-brand">
+                <i class="fas fa-brain"></i>
+                <h2>Bashun-Stay AI</h2>
+            </div>
+
+            <div class="quick-queries">
+    <h4>Ask anything whatever you want like...</h4>
+    <button onclick="setQuery('Show me student rooms under 20k')">Student rooms < 20k</button>
+    <button onclick="setQuery('Best block for families?')">Best family blocks</button>
+    <button onclick="setQuery('Is 30k fair for Block D?')">Price fairness check</button>
+</div>
+            <!-- <p class="consultancy-intro">Your digital advisor for Bashundhara R/A housing. I analyze market trends, block safety, and proximity to provide tailored recommendations.</p> -->
+            
+            <!-- <div class="expert-topics">
+                <div class="topic-pill">Block Comparison</div>
+                <div class="topic-pill">Price Fairness</div>
+                <div class="topic-pill">Student-Friendly Areas</div>
+                <div class="topic-pill">Family Safety Scores</div>
+            </div> -->
+
+            <!-- <div class="ai-status-card">
+                <div class="status-indicator"></div>
+                <span>AI System: Online & Learning</span>
+            </div> -->
+        </aside>
+
+        <main class="consultancy-chat-area">
+            <div id="full-chat-window" class="chat-display">
+                <div class="bot-bubble">
+                    <p>Hello! I am your professional AI Consultant. To give you the best advice, tell me: Are you moving with family, or are you a student? What is your preferred Block or budget?</p>
+                </div>
+            </div>
+            
+            <div class="chat-input-wrapper">
+                <textarea id="consultancy-input" placeholder="Discuss your preferences here... (e.g. 'I need a quiet 3-bedroom flat in Block D for my family under 40k')"></textarea>
+                <button onclick="handleConsultancyLogic()" class="send-btn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </main>
+    </div>
+</section>
+
+
+
+<section id="apartmentDetail" class="detail-page" style="display: none;">
+    <div class="detail-container">
+        <header class="detail-header">
+            <button class="back-btn" onclick="closeDetail()">✕ Close</button>
+            <div class="header-actions">
+                <span><i class="far fa-share-square"></i> Share</span>
+                <span><i class="far fa-heart"></i> Save</span>
+            </div>
+        </header>
+
+        <h1 id="detailTitle">Feels Like Five Star</h1>
+
+      <div class="image-grid">
+    <div class="main-img">
+        <img id="img0" src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1200&q=80" alt="Main Room">
+    </div>
+    
+    <div class="sub-img">
+        <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=600&q=80" alt="Modern Kitchen">
+    </div>
+    
+    <div class="sub-img">
+        <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80" alt="Luxury Washroom">
+    </div>
+    
+    <div class="sub-img">
+        <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=600&q=80" alt="Bashundhara Balcony">
+    </div>
+    
+    <!-- <div class="sub-img corner-img">
+        <img src="https://images.unsplash.com/photo-1449156001935-d2863ec72f06?auto=format&fit=crop&w=600&q=80" alt="Bashundhara City View">
+        <button class="show-all-btn"><i class="fas fa-th"></i> Show all photos</button>
+    </div> -->
+</div>
+        <div class="main-content">
+            <div class="info-section">
+                <h2>Entire flat in Bashundhara, Bangladesh</h2>
+                <p id="roomSpecs">2 guests • 1 bedroom • 1 bed • 1 bath</p>
+                <hr>
+<div class="location-section">
+    <h3>Where you'll be</h3>
+    <p id="mapLocationName">Bashundhara Residential Area, Dhaka</p>
+    <div id="map-container">
+        </div>
+    <div class="location-description">
+        <p><i class="fas fa-walking"></i> Very walkable area with nearby grocery stores and mosques.</p>
+        <p><i class="fas fa-shield-alt"></i> Secure environment with Block-based security gates.</p>
+    </div>
+</div>
+                <div class="guest-favorite-banner">
+                    <div class="badge-icon">🏆 Guest Favorite</div>
+                    <div class="badge-text">One of the most loved homes in Block D</div>
+                    <div class="badge-rating">4.9 ★ <span>96 Reviews</span></div>
+                </div>
+
+                <hr>
+
+                <div class="feature-item">
+                    <i class="fas fa-door-open"></i>
+                    <div>
+                        <strong>Self check-in</strong>
+                        <p>Check yourself in with the security guard.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <strong>Great Location</strong>
+                        <p>100% of recent guests gave the location a 5-star rating.</p>
+                    </div>
+                </div>
+
+                <hr>
+                
+                <div class="ai-insight-box">
+                    <h3>🤖 AI Price Insight</h3>
+                    <p id="aiVerdict">Evaluating market price...</p>
+                </div>
+
+                <hr>
+                <h3>What this place offers</h3>
+                <div class="amenities-grid">
+                    <div><i class="fas fa-city"></i> City skyline view</div>
+                    <div><i class="fas fa-wifi"></i> Wifi</div>
+                    <div><i class="fas fa-car"></i> Free parking</div>
+                    <div><i class="fas fa-snowflake"></i> Air conditioning</div>
+                </div>
+            </div>
+
+            <aside class="reservation-sidebar">
+                <div class="res-card">
+                    <div class="res-price"><span id="resPrice">0</span> BDT <span>/ month</span></div>
+                    <div class="date-picker">
+                        <div class="date-input">CHECK-IN<br><small>12/26/2025</small></div>
+                        <div class="date-input">CHECKOUT<br><small>12/28/2025</small></div>
+                    </div>
+                    <button class="reserve-btn">Contact Owner</button>
+                    <p class="res-note">You won't be charged yet</p>
+                </div>
+                <div class="report-link">⚐ Report this listing</div>
+            </aside>
+        </div>
+    </div>
+
+    
+</section>
+
+<section id="confirmAndPay" class="confirm-page-view" style="display: none;">
+    <div class="confirm-wrapper">
+        <div class="confirm-header-row">
+            <button class="back-circle-btn" onclick="exitConfirmation()"><i class="fas fa-chevron-left"></i></button>
+            <h1>Confirm and pay</h1>
+        </div>
+
+        <div class="confirm-layout">
+            <div class="confirm-left">
+                <div class="booking-step">
+                    <div class="step-info">
+                        <h3>1. Log in or sign up</h3>
+                        <p>You need to be logged in to send a request to the apartment owner.</p>
+                    </div>
+                    <button class="btn-primary" onclick="openAuth('login')">Continue</button>
+                </div>
+
+                <div class="booking-step disabled">
+                    <h3>2. Add a payment method</h3>
+                </div>
+
+                <div class="booking-step disabled">
+                    <h3>3. Review your reservation</h3>
+                </div>
+            </div>
+
+            <aside class="confirm-right">
+                <div class="summary-card-pro">
+                    <div class="prop-mini-header">
+                        <img id="sumImg" src="" alt="Property Mini">
+                        <div class="prop-mini-text">
+                            <h4 id="sumTitle">Modern Flat</h4>
+                            <span>★ 4.9 (96) • Guest favorite</span>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="reservation-details">
+                        <div class="res-row">
+                            <strong>Dates</strong>
+                            <span id="sumDates">Dec 26 – 28, 2025</span>
+                        </div>
+                        <div class="res-row">
+                            <strong>Guests</strong>
+                            <span>1 adult</span>
+                        </div>
+                    </div>
+                    <hr>
+                    <h3>Price details</h3>
+                    <div class="price-breakdown">
+                        <div class="price-line">
+                            <span id="priceLabel">1 month x 25,000 BDT</span>
+                            <span id="basePriceSum">25,000 BDT</span>
+                        </div>
+                        <div class="price-line total-line">
+                            <strong>Total (BDT)</strong>
+                            <strong id="totalPriceSum">25,000 BDT</strong>
+                        </div>
+                    </div>
+                    <button class="confirm-final-btn" onclick="handleFinalBooking()">Confirm & Send Request</button>
+                </div>
+            </aside>
+        </div>
+    </div>
+</section>
+
+    <div id="ai-assistant-toggle">
+        <i class="fas fa-robot"></i>
+        <span>AI Assistant</span>
+    </div>
+
+    <script src="try.js"></script>
+
+    <div id="authOverlay" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+        <button class="close-modal" onclick="closeAuth()">✕</button>
+        
+        <div id="loginSection">
+            <h2>Log in</h2>
+            <hr>
+            <h3>Welcome to Bashun-Stay</h3>
+            <form id="loginForm">
+                <input type="email" id="loginEmail" placeholder="Email" required>
+
+                <input type="password" id="loginPass" placeholder="Password" required>
+                <p class="form-help">We'll call or text you to confirm your number.</p>
+                <button type="submit" class="btn-auth">Continue</button>
+            </form>
+        </div>
+
+        <div id="registerSection" style="display: none;">
+            <h2>Finish signing up</h2>
+            <hr>
+            <form id="registerForm">
+                <input type="text" id="regName" placeholder="Full Name" required>
+                <input type="email" id="regEmail" placeholder="Email" required>
+                <input type="text" id="regName" placeholder="Full Name (As per NID)" required>
+                <select id="userType" class="auth-select" required>
+            <option value="" disabled selected>Register as...</option>
+            <option value="Tenant">Tenant (Looking for a flat)</option>
+            <option value="Owner">Owner (Want to list a flat)</option>
+        </select>
+                <input type="password" id="regPass" placeholder="Create Password" required>
+                <input type="tel" id="regPhone" placeholder="Phone Number (e.g. 017...)" required>
+                <p class="form-help">Make sure it matches the name on your NID.</p>
+                <button type="submit" class="btn-auth">Agree and continue</button>
+            </form>
+        </div>
+
+        <div class="modal-footer">
+            <p id="toggleText">Don't have an account? <a href="#" onclick="showRegister()">Register</a></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
